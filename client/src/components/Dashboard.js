@@ -9,11 +9,13 @@ class Dashboard extends Component {
 	}
 	
 	render() {
-		const { image } = this.props;
-		console.log(image, 'in dashboard');
+		const { images } = this.props;
 		return (
 			<div className="image-wrapper">
-				<img src={image} alt=""/>
+				{
+					images ? images.map((image, index) => <img src={image} key={index} alt=""/>
+					) : 'Loading...'
+				}
 			</div>
 		);
 	}
@@ -21,7 +23,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		image: state.imgReducer.image
+		images: state.imgReducer.images || []
 	}
 }
 

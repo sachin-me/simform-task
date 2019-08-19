@@ -1,5 +1,5 @@
 const initState = {
-	image: ''
+	images: []
 }
 
 export default function imgReducer(state = initState, action) {
@@ -7,7 +7,7 @@ export default function imgReducer(state = initState, action) {
 		case 'GET_IMAGE_SUCCESS': {
 			return {
 				...state,
-				image: action.image
+				images: action.image
 			}
 		}
 				

@@ -7,8 +7,8 @@ module.exports = {
 		const { id } = res.locals.userId;
 
 		User.findOneAndUpdate({ _id: id }, {
-			$set: {
-				image: image
+			$push: {
+				images: image
 			}
 		}, (err, user) => {
 			if (err) {
@@ -34,7 +34,7 @@ module.exports = {
 			}
 			return res.status(200).json({
 				msg: 'Getting image, success',
-				image: user.image
+				image: user.images
 			})
 		})
 	},

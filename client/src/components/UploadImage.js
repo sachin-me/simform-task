@@ -14,8 +14,8 @@ class UploadImage extends Component {
 		const photo = event.target.files[0];
     const sendImg = (str) => {
       str ? this.setState({ image: str }) : null;
-    }
-
+		}
+		
     // file conversion to base64 using FileReader fn
     const reader = new FileReader();
     reader.onload = (event) => {
