@@ -59,5 +59,22 @@ module.exports = {
 				})
 			})
 		}
+	},
+
+	// Getting lists of users
+	getUsers: (req, res) => {
+		
+		User.find({}).select('-password').exec((err, users) => {
+			if (err) {
+				return res.status(500).json({
+					err: 'Internal server error'
+				})
+			} else {
+				return res.status(200).json({
+					msg: 'Getting users',
+					users
+				})
+			}
+		})
 	}
 }

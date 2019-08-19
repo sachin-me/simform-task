@@ -54,6 +54,24 @@ const actions = {
 				cb(false, user.err)
 			}
 		})
+	},
+
+	getUsers: () => dispatch => {
+		fetch('/users/list', {
+			headers: {
+				'Content-Type': 'application/json',
+				authorization: localStorage.token
+			}
+		})
+		.then(res => res.json())
+		.then(users => {
+			if (users.msg) {
+				dispatch({
+					type: 'GET_USERS_SUCCESS',
+					users: users.users
+				})
+			} 
+		})
 	}
 }
 

@@ -5,11 +5,6 @@ var userController = require('./../controllers/userController');
 const isLoggedIn = require('./../controllers/authController');
 let { isLogged } = isLoggedIn;
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
 // Create new user route
 router.post('/register', userController.register)
 
@@ -18,5 +13,8 @@ router.post('/login', userController.login)
 
 // verifying user route
 router.get('/verify', userController.verifyUser);
+
+// Getting lists of users
+router.get('/list', userController.getUsers);
 
 module.exports = router;
