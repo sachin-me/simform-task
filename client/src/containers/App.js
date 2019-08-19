@@ -6,23 +6,12 @@ import actions from '../actions/user.action';
 
 class App extends Component {
 	
-	state = {
-		message: '',
-		error: ''
-	}
-
 	componentDidMount() {
 		const { isAuthenticated } = this.props;
 		if (isAuthenticated) {
 			this.props.dispatch(actions.verifyUser((success, message) => {
-				if (success) {
-					this.setState({
-						message: message
-					})
-				} else {
-					this.setState({
-						error: message
-					})
+				if (!success) {
+					window.location.href = '/login';
 				}
 			}));
 		}
@@ -30,17 +19,11 @@ class App extends Component {
 	
 	render() {
 		const { isAuthenticated } = this.props;
-		const { message, error } = this.state;
 		return (
 			<div>
 				{
 					isAuthenticated ? <Protected /> : <Public />
 				}
-				<p>
-					{
-						message ? message : error
-					}
-				</p>
 			</div>
 		)
 	}
