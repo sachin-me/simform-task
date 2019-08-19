@@ -28,7 +28,7 @@ class Login extends Component {
 		}
     this.props.dispatch(actions.loginUser(data, (success) => {
 			if (success) {
-				this.props.history.push('/');
+				window.location.href = '/';
 			} else {
 				this.setState({
 					message: 'User not found'
