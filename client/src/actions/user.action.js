@@ -72,6 +72,24 @@ const actions = {
 				})
 			} 
 		})
+	},
+
+	getImagesOfUser: (id) => dispatch => {
+		fetch(`/users/${id}`, {
+			headers: {
+				'Content-Type': 'application/json',
+				authorization: localStorage.token
+			}
+		})
+		.then(res => res.json())
+		.then(images => {
+			if (images.msg) {
+				dispatch({
+					type: 'GET_IMAGES_OF_USER',
+					user: images.user
+				})
+			}
+		})
 	}
 }
 

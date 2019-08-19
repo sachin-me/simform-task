@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import actions from '../actions/user.action';
 
 class Users extends Component {
@@ -16,7 +17,9 @@ class Users extends Component {
           users ? users.map(user => {
             return (
               <div key={user._id} className='user-card'>
-                <p><span>Name</span> - {user.username}</p>
+                <p>
+                  <span>Name</span> - <Link to={`/users/${user._id}`}>{user.username}</Link>
+                </p>
                 <p><span>Email</span> - {user.email}</p>
               </div>
             )

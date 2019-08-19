@@ -10,6 +10,13 @@ export default function imgReducer(state = initState, action) {
 				images: action.image
 			}
 		}
+
+		case 'GET_IMAGES_OF_USER': {
+			return {
+				...state,
+				images: action.user.images
+			}
+		}
 				
 		default:
 			return state;

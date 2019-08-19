@@ -76,5 +76,21 @@ module.exports = {
 				})
 			}
 		})
+	},
+
+	getImagesOfUser: (req, res) => {
+		let { id } = req.params;
+		User.findOne({ _id: id }).select('-password').exec((err, user) => {
+			if (err) {
+				return res.status(500).json({
+					err: 'Internal server error'
+				})
+			} else {
+				return res.status(200).json({
+					msg: 'Getting images of a user',
+					user
+				})
+			}
+		})
 	}
 }
