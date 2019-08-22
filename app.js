@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
 const http = require('http');
+const expressStaticGzip = require("express-static-gzip");
 
 require('dotenv').config()
 
-const port = 8000;
+const port = 8000 || process.env.PORT;
 
 mongoose.connect(process.env.MONGOB_URI, { useNewUrlParser: true });
 // On successfull connection
@@ -23,6 +24,15 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.use('/dist/bundle', expressStaticGzip(path.join(__dirname, 'dist/bundle'), {
+  enableBrotli: true,
+  orderPreference: ['br', 'gz'],
+  setHeaders: function (res, path) {
+    res.setHeader("Cache-Control", "public, max-age=31536000");
+  }
+}));
 
 app.set("views", path.join(__dirname, "./server/views"));
 app.set("view engine", "ejs");

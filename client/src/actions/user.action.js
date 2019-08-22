@@ -1,4 +1,3 @@
-// const uri = 'http://localhost:8000'
 
 const actions = {
   createUser: (data, cb) => dispatch => {
